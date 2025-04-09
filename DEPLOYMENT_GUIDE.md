@@ -1,89 +1,65 @@
 
-# Deployment Guide: Embed Your Chat Widget in Notion
+# Simple Deployment Guide
 
-This guide provides step-by-step instructions on how to deploy your chat widget to GitHub Pages and embed it in Notion.
+This guide provides simplified instructions for deploying your chat widget to GitHub Pages and embedding it in Notion.
 
-## GitHub Pages Deployment (Recommended)
+## Deploying to GitHub Pages
 
-### Setting Up GitHub Repository
+### Option 1: Using the GitHub Website (Easiest Method)
 
 1. **Create a GitHub account** (if you don't have one)
-   - Go to https://github.com/signup and follow the instructions
+   - Go to https://github.com/signup
 
-2. **Create a GitHub repository**
+2. **Create a new repository**
    - Go to https://github.com/new
-   - Name your repository (e.g., "notion-chat-widget")
+   - Name your repository (e.g., "chat-widget")
    - Make it public
    - Click "Create repository"
 
-3. **Push your code to GitHub** (from your local computer)
-   ```bash
-   # In your project directory, initialize git if not already done
-   git init
-   
-   # Add all your files to git
-   git add .
-   
-   # Commit your changes
-   git commit -m "Initial commit"
-   
-   # Set the main branch
-   git branch -M main
-   
-   # Add your GitHub repository as remote
-   git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
-   
-   # Push your code to GitHub
-   git push -u origin main
-   ```
-   Replace `YOUR-USERNAME` with your GitHub username and `YOUR-REPO-NAME` with your repository name.
+3. **Upload your files**
+   - On your new repository page, click "uploading an existing file"
+   - Drag and drop all your project files or use the file selector
+   - Commit the changes
 
-### Deploying to GitHub Pages
+4. **Enable GitHub Pages**
+   - Go to Settings > Pages
+   - Under "Source", select "GitHub Actions"
+   - Choose the "Static HTML" workflow
+   - Commit the workflow file
+   - Wait for the deployment to complete (check Actions tab)
 
-4. **Install the gh-pages package** (already included in this project)
-   ```bash
-   npm install --save-dev gh-pages
-   ```
+5. **Access your widget**
+   - Your widget will be available at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed.html`
 
-5. **Deploy your site**
-   ```bash
-   # Run the deploy script
-   bash deploy.sh
-   ```
-   or
-   ```bash
-   npm run deploy
-   # (if you've added the deploy script to package.json)
-   ```
+### Option 2: Using Command Line
 
-6. **Configure GitHub Pages**
-   - On GitHub, go to your repository
-   - Click Settings > Pages
-   - Under "Build and deployment", ensure the source is set to "Deploy from a branch"
-   - Select the "gh-pages" branch and "/root" folder
-   - Click Save
+```bash
+# One-time setup
+git init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+git push -u origin main
 
-7. **Access your deployed chat widget**
-   - Your widget will be available at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed`
-   - This is the URL you'll use for embedding in Notion
+# Deploy
+npm run build
+npx gh-pages -d dist
+```
 
 ## Embedding in Notion
 
 1. In Notion:
    - Type `/embed` and select "Embed"
-   - Paste your GitHub Pages URL with `/embed` at the end
-   - Adjust the dimensions (recommended: width 100%, height 600px)
+   - Paste your GitHub Pages URL: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed.html`
+   - Adjust dimensions (width 100%, height 600px)
    - Click "Embed link"
 
-2. For the best experience:
-   - Ensure the embed has sufficient height (minimum 500px)
-   - For mobile compatibility, place the embed in a full-width column
+2. That's it! Your chat widget should now be embedded in your Notion page.
 
-## Troubleshooting
+## Need Help?
 
-- **Widget not loading**: Ensure your GitHub Pages is properly published
-- **CORS errors**: Check browser console for errors; GitHub Pages should allow embedding
-- **Styling issues**: Try adjusting the iframe dimensions in Notion
-- **Webhook errors**: Ensure your N8N webhook URL is correctly configured and accessible
-
-For additional help, create an issue on your GitHub repository.
+If you encounter any issues with deployment or embedding, you can:
+- Check GitHub's documentation: https://docs.github.com/en/pages
+- Look at the GitHub Actions logs for deployment errors
+- Make sure your embed.html file is available in your repository
