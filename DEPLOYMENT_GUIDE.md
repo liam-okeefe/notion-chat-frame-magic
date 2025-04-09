@@ -1,16 +1,17 @@
 
 # Deployment Guide: Embed Your Chat Widget in Notion
 
-This guide provides instructions on how to deploy your chat widget to GitHub Pages and embed it in Notion.
+This guide provides step-by-step instructions on how to deploy your chat widget to GitHub Pages and embed it in Notion.
 
-## Option 1: GitHub Pages Deployment
+## GitHub Pages Deployment (Recommended)
 
-1. Create a GitHub repository for your project
+1. **Create a GitHub repository**
    - Go to https://github.com/new
-   - Name your repository and make it public
+   - Name your repository (e.g., "notion-chat-widget")
+   - Make it public
    - Click "Create repository"
 
-2. Push your code to GitHub
+2. **Push your code to GitHub**
    ```bash
    git init
    git add .
@@ -20,68 +21,57 @@ This guide provides instructions on how to deploy your chat widget to GitHub Pag
    git push -u origin main
    ```
 
-3. Install the gh-pages package
+3. **Install the gh-pages package**
    ```bash
    npm install --save-dev gh-pages
    ```
 
-4. Add these scripts to your package.json:
+4. **Add these scripts to your package.json**
+   Add these lines to the "scripts" section:
    ```json
    "predeploy": "npm run build",
    "deploy": "gh-pages -d dist"
    ```
 
-5. Add homepage to package.json:
+5. **Add homepage to package.json**
+   Add this line at the top level of your package.json:
    ```json
    "homepage": "https://YOUR-USERNAME.github.io/YOUR-REPO-NAME"
    ```
 
-6. Deploy your site:
+6. **Deploy your site**
    ```bash
    npm run deploy
    ```
 
-7. On GitHub, go to Settings > Pages and ensure your site is published from the gh-pages branch
+7. **Configure GitHub Pages**
+   - On GitHub, go to your repository
+   - Click Settings > Pages
+   - Under "Build and deployment", ensure the source is set to "Deploy from a branch"
+   - Select the "gh-pages" branch and "/root" folder
+   - Click Save
 
-## Option 2: Netlify Deployment
-
-1. Create a Netlify account at https://www.netlify.com/
-2. Click "New site from Git"
-3. Select GitHub and authorize Netlify
-4. Select your repository
-5. Build command: `npm run build`
-6. Publish directory: `dist`
-7. Click "Deploy site"
-
-## Option 3: Vercel Deployment
-
-1. Create a Vercel account at https://vercel.com/
-2. Click "New Project"
-3. Import your Git repository
-4. Configure your project settings (defaults should work)
-5. Click "Deploy"
+8. **Access your deployed chat widget**
+   - Your widget will be available at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed`
+   - This is the URL you'll use for embedding in Notion
 
 ## Embedding in Notion
 
-1. After deploying, access your site's URL at:
-   - GitHub Pages: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed`
-   - Netlify: `https://your-site-name.netlify.app/embed`
-   - Vercel: `https://your-project-name.vercel.app/embed`
-
-2. In Notion:
+1. In Notion:
    - Type `/embed` and select "Embed"
-   - Paste your URL 
-   - Adjust the dimensions as needed (recommended: width 100%, height 600px)
+   - Paste your GitHub Pages URL with `/embed` at the end
+   - Adjust the dimensions (recommended: width 100%, height 600px)
    - Click "Embed link"
 
-Your chat widget should now be fully functional in your Notion page!
+2. For the best experience:
+   - Ensure the embed has sufficient height (minimum 500px)
+   - For mobile compatibility, place the embed in a full-width column
 
 ## Troubleshooting
 
-If your iframe is not embedding correctly:
-- Ensure your deployed site is using HTTPS
-- Check for any content security policies blocking iframes
-- Try accessing the URL directly to verify it works outside Notion
-- Adjust iframe settings in Notion (width/height)
+- **Widget not loading**: Ensure your GitHub Pages is properly published
+- **CORS errors**: Check browser console for errors; GitHub Pages should allow embedding
+- **Styling issues**: Try adjusting the iframe dimensions in Notion
+- **Webhook errors**: Ensure your N8N webhook URL is correctly configured and accessible
 
-For more help, check out the GitHub repository or create an issue.
+For additional help, create an issue on your GitHub repository.
