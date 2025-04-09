@@ -5,53 +5,65 @@ This guide provides step-by-step instructions on how to deploy your chat widget 
 
 ## GitHub Pages Deployment (Recommended)
 
-1. **Create a GitHub repository**
+### Setting Up GitHub Repository
+
+1. **Create a GitHub account** (if you don't have one)
+   - Go to https://github.com/signup and follow the instructions
+
+2. **Create a GitHub repository**
    - Go to https://github.com/new
    - Name your repository (e.g., "notion-chat-widget")
    - Make it public
    - Click "Create repository"
 
-2. **Push your code to GitHub**
+3. **Push your code to GitHub** (from your local computer)
    ```bash
+   # In your project directory, initialize git if not already done
    git init
+   
+   # Add all your files to git
    git add .
+   
+   # Commit your changes
    git commit -m "Initial commit"
+   
+   # Set the main branch
    git branch -M main
+   
+   # Add your GitHub repository as remote
    git remote add origin https://github.com/YOUR-USERNAME/YOUR-REPO-NAME.git
+   
+   # Push your code to GitHub
    git push -u origin main
    ```
+   Replace `YOUR-USERNAME` with your GitHub username and `YOUR-REPO-NAME` with your repository name.
 
-3. **Install the gh-pages package**
+### Deploying to GitHub Pages
+
+4. **Install the gh-pages package** (already included in this project)
    ```bash
    npm install --save-dev gh-pages
    ```
 
-4. **Add these scripts to your package.json**
-   Add these lines to the "scripts" section:
-   ```json
-   "predeploy": "npm run build",
-   "deploy": "gh-pages -d dist"
+5. **Deploy your site**
+   ```bash
+   # Run the deploy script
+   bash deploy.sh
    ```
-
-5. **Add homepage to package.json**
-   Add this line at the top level of your package.json:
-   ```json
-   "homepage": "https://YOUR-USERNAME.github.io/YOUR-REPO-NAME"
-   ```
-
-6. **Deploy your site**
+   or
    ```bash
    npm run deploy
+   # (if you've added the deploy script to package.json)
    ```
 
-7. **Configure GitHub Pages**
+6. **Configure GitHub Pages**
    - On GitHub, go to your repository
    - Click Settings > Pages
    - Under "Build and deployment", ensure the source is set to "Deploy from a branch"
    - Select the "gh-pages" branch and "/root" folder
    - Click Save
 
-8. **Access your deployed chat widget**
+7. **Access your deployed chat widget**
    - Your widget will be available at: `https://YOUR-USERNAME.github.io/YOUR-REPO-NAME/embed`
    - This is the URL you'll use for embedding in Notion
 
